@@ -21,3 +21,4 @@ return (SHA256((const unsigned char *)s, len, digest));
 }
 printf("\n");
 }
+
