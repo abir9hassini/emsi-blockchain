@@ -1,1 +1,1 @@
-This is the blockchain project
+This is the readme file of the blockchain project
