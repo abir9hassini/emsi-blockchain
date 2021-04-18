@@ -39,3 +39,4 @@ EC_KEY_free(key);
 
 return (EXIT_SUCCESS);
 }
+
