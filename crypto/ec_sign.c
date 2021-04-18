@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "hblk_crypto.h"
 
 /**
@@ -9,23 +13,18 @@
  *
  * Return: pointer to signature buffer on success, NULL on error
  */
-uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen,
-		sig_t *sig)
+uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
+	size_t msglen, sig_t *sig)
 {
-unsigned char md[SHA256_DIGEST_LENGTH];
-
-if (!key || !msg || !sig)
+if (!key || !msg || !msglen)
 return (NULL);
-if (!EC_KEY_check_key(key))
+bzero(sig->sig, sizeof(sig->sig));
+sig->len = 0;
+if (!ECDSA_sign(0, msg, msglen, sig->sig,
+		(unsigned int *)&sig->len, (EC_KEY *)key))
+{
+sig->len = 0;
 return (NULL);
-if (!SHA256(msg, msglen, md))
-return (NULL);
-sig->len = ECDSA_size(key);
-if (!sig->len)
-return (NULL);
-if (!ECDSA_sign(EC_CURVE, md, SHA256_DIGEST_LENGTH, sig->sig,
-(unsigned int *)&(sig->len), (EC_KEY *)key))
-return (NULL);
-return (sig->sig);
 }
-
+return ((uint8_t *)sig->sig);
+}
