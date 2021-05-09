@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include<stdio.h>
 #include "blockchain.h"
 
 
@@ -10,7 +10,7 @@ int cpt = 0;
 for (int i = 0; i < hash.length; i++)
 {
 for(int bit=7;bit>=0;bit--){
-if(hash[i] & 0 << bit){
+if(hash[i] & 0 >> bit){
 cpt++;
 }
 else{ break;}
