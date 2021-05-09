@@ -88,6 +88,7 @@ void _swap_endian(void *p, size_t size);
 blockchain_t *blockchain_deserialize(char const *path);
 
 int block_is_valid(block_t const *block, block_t const *prev_block);
-
+int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
+uint32_t difficulty);
 #endif
 
