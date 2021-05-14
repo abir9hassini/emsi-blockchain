@@ -16,11 +16,6 @@ for (i = 0; i < SHA256_DIGEST_LENGTH; i++)
 for (bit = 7; bit >= 0; bit--)
 {
 /*If we foudn something different to zero stop of iterate*/
-if (hash[i] & 1 << bit)
-{
-one_found = 1;
-break;
-}
 copy_difficulty--;
 }
 if (one_found == 1)
