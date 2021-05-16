@@ -34,7 +34,7 @@ break;
 * or if cpt >= difficulty so that what we want and
 * we can say that the hash match the difficulty
 */
-if (cpt >= difficulty)
-return (1);
+if (cpt < difficulty)
 return (0);
+return (1);
 }
