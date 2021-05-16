@@ -6,25 +6,32 @@
 int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 uint32_t difficulty)
 {
-uint32_t i,cpt = 0;
-uint32_t bit = 7;
+int i = 0, bit = 0, one_found = 0, copy_difficulty = 0;
 
+copy_difficulty = difficulty;
+/*Iterate every byte*/
 for (i = 0; i < SHA256_DIGEST_LENGTH; i++)
 {
-if(!hash[i])
-cpt += 8;
-else
-break;
-for (bit = 1; bit <= 8; bit++)
+/*Check every bit from left to right*/
+for (bit = 7; bit >= 0; bit--)
 {
-if (hash[i] << bit == 0)
+/*If we found something different to zero stop of iterate*/
+if (hash[i] & 1 << bit)
 {
-cpt += bit;
+one_found = 1;
 break;
 }
+copy_difficulty--;
+}
+if (one_found == 1)
+{
+break;
 }
 }
-if (cpt >= difficulty)
+/*If the zeros from left to right is greater than difficulty return 1 else 0*/
+if (copy_difficulty <= 0)
+{
 return (1);
+}
 return (0);
 }
