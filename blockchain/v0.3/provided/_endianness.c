@@ -7,14 +7,14 @@
  */
 uint8_t _get_endianness(void)
 {
-_endian_t order = { 1 };
+	_endian_t order = { 1 };
 
-if (order.bytes[0] == 1)
-return (1); /* Little endian */
-if (order.bytes[0] == 0)
-return (2); /* Big endian */
+	if (order.bytes[0] == 1)
+		return (1); /* Little endian */
+	if (order.bytes[0] == 0)
+		return (2); /* Big endian */
 
-return (0); /* Should not happen */
+	return (0); /* Should not happen */
 }
 
 /**
@@ -25,14 +25,13 @@ return (0); /* Should not happen */
  */
 void _swap_endian(void *p, size_t size)
 {
-size_t i;
-uint8_t *n = (uint8_t *)p;
+	size_t i;
+	uint8_t *n = (uint8_t *)p;
 
-for (i = 0; i < size / 2; i++)
-{
-n[i] ^= n[size - (i + 1)];
-n[size - (i + 1)] ^= n[i];
-n[i] ^= n[size - (i + 1)];
+	for (i = 0; i < size / 2; i++)
+	{
+		n[i] ^= n[size - (i + 1)];
+		n[size - (i + 1)] ^= n[i];
+		n[i] ^= n[size - (i + 1)];
+	}
 }
-}
-

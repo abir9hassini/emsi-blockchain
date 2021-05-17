@@ -15,36 +15,36 @@ void _blockchain_print_brief(blockchain_t const *blockchain);
  */
 static void _print_hex_buffer(uint8_t const *buf, size_t len)
 {
-size_t i;
+  size_t i;
 
-for (i = 0; buf && i < len; i++)
-printf("%02x", buf[i]);
+  for (i = 0; buf && i < len; i++)
+    printf("%02x", buf[i]);
 }
 
 static block_t *_add_block(blockchain_t *blockchain, block_t const *prev,
-char const *s)
+			   char const *s)
 {
-block_t *block;
+  block_t *block;
 
-block = block_create(prev, (int8_t *)s, (uint32_t)strlen(s));
-block->info.difficulty = 20;
+  block = block_create(prev, (int8_t *)s, (uint32_t)strlen(s));
+  block->info.difficulty = 20;
 
-block_mine(block);
+  block_mine(block);
 
-if (block_is_valid(block, prev) == 0)
-{
-printf("Block mined: [%u] ", block->info.difficulty);
-_print_hex_buffer(block->hash, SHA256_DIGEST_LENGTH);
-printf("\n");
-llist_add_node(blockchain->chain, block, ADD_NODE_REAR);
-}
-else
-{
-fprintf(stderr, "Invalid Block with index: %u\n",
-block->info.index);
-}
+  if (block_is_valid(block, prev) == 0)
+    {
+      printf("Block mined: [%u] ", block->info.difficulty);
+      _print_hex_buffer(block->hash, SHA256_DIGEST_LENGTH);
+      printf("\n");
+      llist_add_node(blockchain->chain, block, ADD_NODE_REAR);
+    }
+  else
+    {
+      fprintf(stderr, "Invalid Block with index: %u\n",
+	      block->info.index);
+    }
 
-return (block);
+  return (block);
 }
 
 /**
@@ -54,26 +54,26 @@ return (block);
  */
 int main(void)
 {
-blockchain_t *blockchain;
-block_t *block;
+  blockchain_t *blockchain;
+  block_t *block;
 
-blockchain = blockchain_create();
-block = llist_get_head(blockchain->chain);
-block = _add_block(blockchain, block, "Holberton");
-block = _add_block(blockchain, block, "School");
-block = _add_block(blockchain, block, "of");
-block = _add_block(blockchain, block, "Software");
-block = _add_block(blockchain, block, "Engineering");
-block = _add_block(blockchain, block, "972");
-block = _add_block(blockchain, block, "Mission");
-block = _add_block(blockchain, block, "Street");
-block = _add_block(blockchain, block, "San Francisco");
-block = _add_block(blockchain, block, "CA");
-block = _add_block(blockchain, block, "\\o/");
+  blockchain = blockchain_create();
+  block = llist_get_head(blockchain->chain);
+  block = _add_block(blockchain, block, "Holberton");
+  block = _add_block(blockchain, block, "School");
+  block = _add_block(blockchain, block, "of");
+  block = _add_block(blockchain, block, "Software");
+  block = _add_block(blockchain, block, "Engineering");
+  block = _add_block(blockchain, block, "972");
+  block = _add_block(blockchain, block, "Mission");
+  block = _add_block(blockchain, block, "Street");
+  block = _add_block(blockchain, block, "San Francisco");
+  block = _add_block(blockchain, block, "CA");
+  block = _add_block(blockchain, block, "\\o/");
 
-_blockchain_print_brief(blockchain);
+  _blockchain_print_brief(blockchain);
 
-blockchain_destroy(blockchain);
+  blockchain_destroy(blockchain);
 
-return (EXIT_SUCCESS);
+  return (EXIT_SUCCESS);
 }

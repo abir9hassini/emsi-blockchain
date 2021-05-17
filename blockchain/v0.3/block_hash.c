@@ -1,15 +1,16 @@
 #include "blockchain.h"
-
 /**
- * block_hash - get the hash of a block
- * @block: block to be hashed, only hash field will not be hashed
- * @hash_buf: buffer for digest
- * Return: hash digest or NULL if failed
- */
-uint8_t *block_hash(block_t const *block,
-		    uint8_t hash_buf[SHA256_DIGEST_LENGTH])
+ * block_hash - hashes info + data
+ * @block: the block to be hashed.
+ * @hash_buf: the digest.
+ * Return: the digest, or NULL.
+*/
+uint8_t *block_hash(block_t const *block, uint8_t
+hash_buf[SHA256_DIGEST_LENGTH])
 {
-memset(hash_buf, 0, SHA256_DIGEST_LENGTH);
-return (SHA256((const unsigned char *)block,
-	       sizeof(block->info) + block->data.len, hash_buf));
+if (!block)
+return (NULL);
+SHA256((unsigned char *)block, block->data.len + sizeof(block->info),
+hash_buf);
+return ((uint8_t *)(hash_buf));
 }
