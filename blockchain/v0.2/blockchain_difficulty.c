@@ -25,7 +25,7 @@ BLOCK_GENERATION_INTERVAL;
 actualElapsed_time = last_block->info.timestamp -
 adjusted_block->info.timestamp;
 half = expectedElapsed_time / 2;
-if (actualElapsed_time < half)
+if (actualElapsed_time  < half)
 return (last_block->info.difficulty + 1);
 else if (actualElapsed_time > 2 * expectedElapsed_time)
 return (last_block->info.difficulty > 0 ?
