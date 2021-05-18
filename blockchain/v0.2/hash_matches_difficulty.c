@@ -10,18 +10,26 @@ uint32_t difficulty)
 {
 uint8_t i, bit, cpt = 0;
 
-/* Iterate the hash table byte by byte */
+/**
+* Iterate the hash table byte by byte
+*/
 for (i = 0; i < SHA256_DIGEST_LENGTH; i++)
-/* if a byte ==0 we increment directly the cpt */
+/**
+* if a byte ==0 we increment directly the cpt
+*/
 if (!hash[i])
 cpt += 8;
 else
-/* else , we check bit by bit if hash[i] >> bit is equal to 00000000 */
+/**
+* else , we check bit by bit if hash[i] >> bit is equal to 00000000
+*/
 break;
 for (bit = 1; bit < 8; bit++)
 if (hash[i] >> bit == 0)
 {
-/*in this case we increment cpt by 8 - bit */
+/**
+* in this case we increment cpt by 8 - bit
+*/
 cpt += (8 - bit);
 break;
 }
