@@ -16,7 +16,7 @@
 #define BLOCK_GENERATION_INTERVAL 1
 #define DIFFICULTY_ADJUSTMENT_INTERVAL 5
 
-#define GENESIS_BLOCK { \
+#define GENESIS_BLOCK_CONTENT { \
 { /* info */ \
 0 /* index */, \
 0, /* difficulty */ \
@@ -62,7 +62,7 @@ uint8_t     hash[SHA256_DIGEST_LENGTH];
 
 } block_t;
 
-extern block_t const _genesis;
+extern block_t const Genesis;
 
 blockchain_t *blockchain_create(void);
 
