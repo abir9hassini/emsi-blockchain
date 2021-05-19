@@ -15,7 +15,7 @@
 #define UNUSED(x) (void)(x)
 
 
-#define GENESIS_BLOCK { \
+#define GENESIS_BLOCK_CONTENT { \
 { /* info */ \
 0 /* index */, \
 0, /* difficulty */ \
