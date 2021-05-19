@@ -17,6 +17,6 @@ if (hash_matches_difficulty(block->hash, block->info.difficulty))
 {
 break;
 }
-block->info.nonce + 1;
+block->info.nonce++;
 } while (block->info.nonce != 0);
 }
