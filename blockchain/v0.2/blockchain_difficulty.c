@@ -28,7 +28,6 @@ half = expectedElapsed_time / 2;
 if (actualElapsed_time  < half)
 return (last_block->info.difficulty + 1);
 else if (actualElapsed_time > 2 * expectedElapsed_time)
-return (last_block->info.difficulty > 0 ?
-last_block->info.difficulty - 1 : 0);
+return (last_block->info.difficulty - 1);
 return (last_block->info.difficulty);
 }
