@@ -7,7 +7,7 @@
  * @arg: The file in which the data will be written
  * Return: 0 upon success, or -1 upon failure
  */
-int write_block(llist_node_t ptr, unsigned int idx, void *arg)
+int write_block(llist_node_t ptr,  void *arg)
 {
 FILE *fp;
 block_t *block = ptr;
